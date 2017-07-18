@@ -1,0 +1,140 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPage.master.cs" Inherits="Owl_Parking.MasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Owl Parking S.A</title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/materialize.js"></script>
+    <script type="text/javascript" src="http://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
+    <script src="js/jsTabla.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" />
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="estilos/estilo.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div id="principal" class="light-blue darken-4">
+            <header>
+
+                <h1 class="white-text">Condominio Nororiente II</h1>
+                <p id="subtitulo">Designed By Owl Parking S.A</p>
+                <div>
+                    <asp:LinkButton ID="LinkButton1" runat="server" PostBackUrl="~/Login.aspx">cerrar sesión</asp:LinkButton>
+                </div>
+                <nav class="light-blue darken-4">
+                    <div class="nav-wrapper">
+                        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                        <ul class="right hide-on-med-and-down">
+                            <li><a href="Estacionamiento.aspx">HOME</a></li>
+                            <li><a href="Visitas.aspx">VISITAS</a></li>
+                            <li><a href="CrearCuenta.aspx">CREAR CUENTA</a></li>
+                            <li><a href="EditarCuenta.aspx">EDITAR</a></li>
+                        </ul>
+                        <ul class="side-nav center" id="mobile-demo">
+                            <li>
+                                <img src="img/owl.png" /></li>
+                            <li><a href="Estacionamiento.aspx">Home</a></li>
+                            <li><a href="Visitas.aspx">Visitas</a></li>
+                            <li><a href="CrearCuenta.aspx">Crear Cuenta</a></li>
+                            <li><a href="EditarCuenta.aspx">Editar Cuenta</a></li>
+                        </ul>
+                    </div>
+                </nav>
+
+            </header>
+            <div class="row">
+                <div class="col s12 m1 l1 xl1">
+                </div>
+                <div class="col s12 m12 l12 xl12">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                        <!-- NO MASTER PAGE -->
+                    </asp:ContentPlaceHolder>
+                </div>
+                <div class="col s12 m1 l1 xl1">
+                </div>
+            </div>
+            <br />
+            <br />
+
+            <footer class="page-footer light-blue darken-4">
+                <div class="container">
+                    <div class="row">
+                        <div class="col l6 s12">
+                            <h5 class="white-text">Owl Parking S.A</h5>
+                            <p class="grey-text text-lighten-4">Somos una empresa dedicada a tu estacionamiento.</p>
+                        </div>
+                        <div class="col l4 offset-l2 s12">
+                            <h5 class="white-text">Enlaces</h5>
+                            <ul>
+                                <li><a class="grey-text text-lighten-3" href="#!">Home</a></li>
+                                <li><a class="grey-text text-lighten-3" href="#!">Visitas</a></li>
+                                <li><a class="grey-text text-lighten-3" href="#!">Crear Cuenta</a></li>
+                                <li><a class="grey-text text-lighten-3" href="#!">Editar</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-copyright">
+                    <div class="container">
+                        © 2014 Copyright Text
+                    </div>
+                </div>
+            </footer>
+        </div>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $(".button-collapse").sideNav();
+            });
+        </script>
+        <script type="text/javascript">
+            $(document).ready(function VerNotificacion() {
+                $.ajax({
+                    type: "POST",
+                    url: "Estacionamiento.aspx/VerNotificacion",
+                    data: '{name: "juan" }',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function OnSuccess(response) {
+                        if (response.d == "verdadero") {
+                            
+                            window.open('Popupo.aspx', 'popup', 'width=800,height=500');
+                            
+                        } else {
+
+                        }
+                    },
+                    failure: function (response) {
+                        alert(response.d);
+                    }
+                    
+                });
+                
+                var intervalo = window.setTimeout(VerNotificacion, 10000);
+                intervalo = 1;
+                
+            });
+        </script>
+<%--        <script type="text/javascript">
+            $(document).ready(function EjecutarArduino() {
+                $.ajax({
+                    type: "POST",
+                    url: "MasterPage.Master/EjecutarArduino",
+                    contentType: "application/json; charset=utf-8",
+                    data: '{name: "juan" }',
+                    datatype: "json",
+                    failure: (alert("error de arduino"))
+                })
+                setInterval(EjecutarArduino, 2000);
+            });
+        </script>--%>
+    </form>
+</body>
+</html>

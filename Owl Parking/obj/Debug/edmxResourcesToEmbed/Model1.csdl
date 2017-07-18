@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Database1Model" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="Database1Entities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Administrador" EntityType="Database1Model.Administrador" />
+    <EntitySet Name="Condominio" EntityType="Database1Model.Condominio" />
+    <EntitySet Name="Estac_Persona" EntityType="Database1Model.Estac_Persona" />
+    <EntitySet Name="Estacionamiento" EntityType="Database1Model.Estacionamiento" />
+    <EntitySet Name="Notificacion" EntityType="Database1Model.Notificacion" />
+    <EntitySet Name="Propietario" EntityType="Database1Model.Propietario" />
+    <EntitySet Name="Visita" EntityType="Database1Model.Visita" />
+    <AssociationSet Name="FK_Administrador_Condominio" Association="Database1Model.FK_Administrador_Condominio">
+      <End Role="Condominio" EntitySet="Condominio" />
+      <End Role="Administrador" EntitySet="Administrador" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Estacionamiento_Condominio" Association="Database1Model.FK_Estacionamiento_Condominio">
+      <End Role="Condominio" EntitySet="Condominio" />
+      <End Role="Estacionamiento" EntitySet="Estacionamiento" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Estac_Persona_Estacionamiento" Association="Database1Model.FK_Estac_Persona_Estacionamiento">
+      <End Role="Estacionamiento" EntitySet="Estacionamiento" />
+      <End Role="Estac_Persona" EntitySet="Estac_Persona" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Estac_Persona_Propietario" Association="Database1Model.FK_Estac_Persona_Propietario">
+      <End Role="Propietario" EntitySet="Propietario" />
+      <End Role="Estac_Persona" EntitySet="Estac_Persona" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notificacion_Estacionamiento" Association="Database1Model.FK_Notificacion_Estacionamiento">
+      <End Role="Estacionamiento" EntitySet="Estacionamiento" />
+      <End Role="Notificacion" EntitySet="Notificacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Visita_Estacionamiento" Association="Database1Model.FK_Visita_Estacionamiento">
+      <End Role="Estacionamiento" EntitySet="Estacionamiento" />
+      <End Role="Visita" EntitySet="Visita" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Administrador">
+    <Key>
+      <PropertyRef Name="Administrador_Id" />
+    </Key>
+    <Property Name="Administrador_Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Correo" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Constraseña" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Cargo" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Condominio_Id" Type="Int32" />
+    <NavigationProperty Name="Condominio" Relationship="Database1Model.FK_Administrador_Condominio" FromRole="Administrador" ToRole="Condominio" />
+  </EntityType>
+  <EntityType Name="Condominio">
+    <Key>
+      <PropertyRef Name="Condominio_Id" />
+    </Key>
+    <Property Name="Condominio_Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Administrador" Relationship="Database1Model.FK_Administrador_Condominio" FromRole="Condominio" ToRole="Administrador" />
+    <NavigationProperty Name="Estacionamiento" Relationship="Database1Model.FK_Estacionamiento_Condominio" FromRole="Condominio" ToRole="Estacionamiento" />
+  </EntityType>
+  <EntityType Name="Estac_Persona">
+    <Key>
+      <PropertyRef Name="Estac_Persona_Id" />
+    </Key>
+    <Property Name="Estac_Persona_Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Patente" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Propietario_Id" Type="Int32" />
+    <Property Name="Estacionamiento_Id" Type="Int32" />
+    <NavigationProperty Name="Estacionamiento" Relationship="Database1Model.FK_Estac_Persona_Estacionamiento" FromRole="Estac_Persona" ToRole="Estacionamiento" />
+    <NavigationProperty Name="Propietario" Relationship="Database1Model.FK_Estac_Persona_Propietario" FromRole="Estac_Persona" ToRole="Propietario" />
+  </EntityType>
+  <EntityType Name="Estacionamiento">
+    <Key>
+      <PropertyRef Name="Estacionamiento_Id" />
+    </Key>
+    <Property Name="Estacionamiento_Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Estado" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Tipo" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Condominio_Id" Type="Int32" />
+    <Property Name="Codigo" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Condominio" Relationship="Database1Model.FK_Estacionamiento_Condominio" FromRole="Estacionamiento" ToRole="Condominio" />
+    <NavigationProperty Name="Estac_Persona" Relationship="Database1Model.FK_Estac_Persona_Estacionamiento" FromRole="Estacionamiento" ToRole="Estac_Persona" />
+    <NavigationProperty Name="Notificacion" Relationship="Database1Model.FK_Notificacion_Estacionamiento" FromRole="Estacionamiento" ToRole="Notificacion" />
+    <NavigationProperty Name="Visita" Relationship="Database1Model.FK_Visita_Estacionamiento" FromRole="Estacionamiento" ToRole="Visita" />
+  </EntityType>
+  <EntityType Name="Notificacion">
+    <Key>
+      <PropertyRef Name="Notificacion_Id" />
+    </Key>
+    <Property Name="Notificacion_Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Fecha" Type="DateTime" Precision="3" />
+    <Property Name="Comentario" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="Estacionamiento_Id" Type="Int32" />
+    <NavigationProperty Name="Estacionamiento" Relationship="Database1Model.FK_Notificacion_Estacionamiento" FromRole="Notificacion" ToRole="Estacionamiento" />
+  </EntityType>
+  <EntityType Name="Propietario">
+    <Key>
+      <PropertyRef Name="Propietario_Id" />
+    </Key>
+    <Property Name="Propietario_Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Telefono" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Torre" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Departamento" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Correo" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Contraseña" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Estac_Persona" Relationship="Database1Model.FK_Estac_Persona_Propietario" FromRole="Propietario" ToRole="Estac_Persona" />
+  </EntityType>
+  <EntityType Name="Visita">
+    <Key>
+      <PropertyRef Name="Visita_Id" />
+    </Key>
+    <Property Name="Visita_Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Patente" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Telefono" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Torre" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Departamento" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Estacionamiento_Id" Type="Int32" />
+    <NavigationProperty Name="Estacionamiento" Relationship="Database1Model.FK_Visita_Estacionamiento" FromRole="Visita" ToRole="Estacionamiento" />
+    <Property Name="Hora" Type="Time" Precision="7" />
+  </EntityType>
+  <Association Name="FK_Administrador_Condominio">
+    <End Role="Condominio" Type="Database1Model.Condominio" Multiplicity="0..1" />
+    <End Role="Administrador" Type="Database1Model.Administrador" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Condominio">
+        <PropertyRef Name="Condominio_Id" />
+      </Principal>
+      <Dependent Role="Administrador">
+        <PropertyRef Name="Condominio_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Estacionamiento_Condominio">
+    <End Role="Condominio" Type="Database1Model.Condominio" Multiplicity="0..1" />
+    <End Role="Estacionamiento" Type="Database1Model.Estacionamiento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Condominio">
+        <PropertyRef Name="Condominio_Id" />
+      </Principal>
+      <Dependent Role="Estacionamiento">
+        <PropertyRef Name="Condominio_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Estac_Persona_Estacionamiento">
+    <End Role="Estacionamiento" Type="Database1Model.Estacionamiento" Multiplicity="0..1" />
+    <End Role="Estac_Persona" Type="Database1Model.Estac_Persona" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Estacionamiento">
+        <PropertyRef Name="Estacionamiento_Id" />
+      </Principal>
+      <Dependent Role="Estac_Persona">
+        <PropertyRef Name="Estacionamiento_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Estac_Persona_Propietario">
+    <End Role="Propietario" Type="Database1Model.Propietario" Multiplicity="0..1" />
+    <End Role="Estac_Persona" Type="Database1Model.Estac_Persona" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Propietario">
+        <PropertyRef Name="Propietario_Id" />
+      </Principal>
+      <Dependent Role="Estac_Persona">
+        <PropertyRef Name="Propietario_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notificacion_Estacionamiento">
+    <End Role="Estacionamiento" Type="Database1Model.Estacionamiento" Multiplicity="0..1" />
+    <End Role="Notificacion" Type="Database1Model.Notificacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Estacionamiento">
+        <PropertyRef Name="Estacionamiento_Id" />
+      </Principal>
+      <Dependent Role="Notificacion">
+        <PropertyRef Name="Estacionamiento_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Visita_Estacionamiento">
+    <End Role="Estacionamiento" Type="Database1Model.Estacionamiento" Multiplicity="0..1" />
+    <End Role="Visita" Type="Database1Model.Visita" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Estacionamiento">
+        <PropertyRef Name="Estacionamiento_Id" />
+      </Principal>
+      <Dependent Role="Visita">
+        <PropertyRef Name="Estacionamiento_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

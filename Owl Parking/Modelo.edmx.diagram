@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="27ad7a727ebd4c8b949f18bdd53c0455" Name="Diagrama1">
+        <EntityTypeShape EntityType="ti2Model.Administrador" Width="1.5" PointX="9.375" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ti2Model.Condominio" Width="1.5" PointX="6" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ti2Model.Estac_Persona" Width="1.5" PointX="4.75" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ti2Model.Estacionamiento" Width="1.5" PointX="2.875" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ti2Model.Notificacion" Width="2.25" PointX="1" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ti2Model.Propietario" Width="1.5" PointX="7.375" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ti2Model.Visita" Width="1.5" PointX="0.75" PointY="9.625" IsExpanded="true" />
+        <AssociationConnector Association="ti2Model.fk_Administrador_Condominio1" ManuallyRouted="false" />
+        <AssociationConnector Association="ti2Model.fk_Estacionamiento_Condominio" ManuallyRouted="false" />
+        <AssociationConnector Association="ti2Model.fk_Estac_Persona_Estacionamiento1" ManuallyRouted="false" />
+        <AssociationConnector Association="ti2Model.fk_Estac_Persona_Propietario1" ManuallyRouted="false" />
+        <AssociationConnector Association="ti2Model.fk_Notificacion_Estacionamiento1" ManuallyRouted="false" />
+        <AssociationConnector Association="ti2Model.fk_Visita_Estacionamiento1" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ti2Model.Arduino" Width="1.5" PointX="6" PointY="10.75" />
+        <AssociationConnector Association="ti2Model.FK__Estacionamiento" />
+        <AssociationConnector Association="ti2Model.fk_Estacionamiento_Arduino" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Database1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Administrador">
+    <Key>
+      <PropertyRef Name="Administrador_Id" />
+    </Key>
+    <Property Name="Administrador_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+    <Property Name="Correo" Type="nvarchar" MaxLength="50" />
+    <Property Name="Constraseña" Type="nvarchar" MaxLength="50" />
+    <Property Name="Cargo" Type="nvarchar" MaxLength="50" />
+    <Property Name="Condominio_Id" Type="int" />
+  </EntityType>
+  <EntityType Name="Condominio">
+    <Key>
+      <PropertyRef Name="Condominio_Id" />
+    </Key>
+    <Property Name="Condominio_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Estac_Persona">
+    <Key>
+      <PropertyRef Name="Estac_Persona_Id" />
+    </Key>
+    <Property Name="Estac_Persona_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Patente" Type="nvarchar" MaxLength="50" />
+    <Property Name="Propietario_Id" Type="int" />
+    <Property Name="Estacionamiento_Id" Type="int" />
+  </EntityType>
+  <EntityType Name="Estacionamiento">
+    <Key>
+      <PropertyRef Name="Estacionamiento_Id" />
+    </Key>
+    <Property Name="Estacionamiento_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Estado" Type="nvarchar" MaxLength="50" />
+    <Property Name="Tipo" Type="nvarchar" MaxLength="50" />
+    <Property Name="Condominio_Id" Type="int" />
+    <Property Name="Codigo" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Notificacion">
+    <Key>
+      <PropertyRef Name="Notificacion_Id" />
+    </Key>
+    <Property Name="Notificacion_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" />
+    <Property Name="Comentario" Type="nvarchar" MaxLength="200" />
+    <Property Name="Estacionamiento_Id" Type="int" />
+  </EntityType>
+  <EntityType Name="Propietario">
+    <Key>
+      <PropertyRef Name="Propietario_Id" />
+    </Key>
+    <Property Name="Propietario_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+    <Property Name="Telefono" Type="nvarchar" MaxLength="50" />
+    <Property Name="Torre" Type="nvarchar" MaxLength="50" />
+    <Property Name="Departamento" Type="nvarchar" MaxLength="50" />
+    <Property Name="Correo" Type="nvarchar" MaxLength="50" />
+    <Property Name="Contraseña" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Visita">
+    <Key>
+      <PropertyRef Name="Visita_Id" />
+    </Key>
+    <Property Name="Visita_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+    <Property Name="Patente" Type="nvarchar" MaxLength="50" />
+    <Property Name="Telefono" Type="nvarchar" MaxLength="50" />
+    <Property Name="Torre" Type="nvarchar" MaxLength="50" />
+    <Property Name="Departamento" Type="nvarchar" MaxLength="50" />
+    <Property Name="Hora" Type="time" Precision="7" />
+    <Property Name="Estacionamiento_Id" Type="int" />
+  </EntityType>
+  <Association Name="FK_Administrador_Condominio">
+    <End Role="Condominio" Type="Self.Condominio" Multiplicity="0..1" />
+    <End Role="Administrador" Type="Self.Administrador" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Condominio">
+        <PropertyRef Name="Condominio_Id" />
+      </Principal>
+      <Dependent Role="Administrador">
+        <PropertyRef Name="Condominio_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Estac_Persona_Estacionamiento">
+    <End Role="Estacionamiento" Type="Self.Estacionamiento" Multiplicity="0..1" />
+    <End Role="Estac_Persona" Type="Self.Estac_Persona" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Estacionamiento">
+        <PropertyRef Name="Estacionamiento_Id" />
+      </Principal>
+      <Dependent Role="Estac_Persona">
+        <PropertyRef Name="Estacionamiento_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Estac_Persona_Propietario">
+    <End Role="Propietario" Type="Self.Propietario" Multiplicity="0..1" />
+    <End Role="Estac_Persona" Type="Self.Estac_Persona" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Propietario">
+        <PropertyRef Name="Propietario_Id" />
+      </Principal>
+      <Dependent Role="Estac_Persona">
+        <PropertyRef Name="Propietario_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Estacionamiento_Condominio">
+    <End Role="Condominio" Type="Self.Condominio" Multiplicity="0..1" />
+    <End Role="Estacionamiento" Type="Self.Estacionamiento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Condominio">
+        <PropertyRef Name="Condominio_Id" />
+      </Principal>
+      <Dependent Role="Estacionamiento">
+        <PropertyRef Name="Condominio_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notificacion_Estacionamiento">
+    <End Role="Estacionamiento" Type="Self.Estacionamiento" Multiplicity="0..1" />
+    <End Role="Notificacion" Type="Self.Notificacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Estacionamiento">
+        <PropertyRef Name="Estacionamiento_Id" />
+      </Principal>
+      <Dependent Role="Notificacion">
+        <PropertyRef Name="Estacionamiento_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Visita_Estacionamiento">
+    <End Role="Estacionamiento" Type="Self.Estacionamiento" Multiplicity="0..1" />
+    <End Role="Visita" Type="Self.Visita" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Estacionamiento">
+        <PropertyRef Name="Estacionamiento_Id" />
+      </Principal>
+      <Dependent Role="Visita">
+        <PropertyRef Name="Estacionamiento_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Database1ModelStoreContainer">
+    <EntitySet Name="Administrador" EntityType="Self.Administrador" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Condominio" EntityType="Self.Condominio" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Estac_Persona" EntityType="Self.Estac_Persona" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Estacionamiento" EntityType="Self.Estacionamiento" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Notificacion" EntityType="Self.Notificacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Propietario" EntityType="Self.Propietario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Visita" EntityType="Self.Visita" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Administrador_Condominio" Association="Self.FK_Administrador_Condominio">
+      <End Role="Condominio" EntitySet="Condominio" />
+      <End Role="Administrador" EntitySet="Administrador" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Estac_Persona_Estacionamiento" Association="Self.FK_Estac_Persona_Estacionamiento">
+      <End Role="Estacionamiento" EntitySet="Estacionamiento" />
+      <End Role="Estac_Persona" EntitySet="Estac_Persona" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Estac_Persona_Propietario" Association="Self.FK_Estac_Persona_Propietario">
+      <End Role="Propietario" EntitySet="Propietario" />
+      <End Role="Estac_Persona" EntitySet="Estac_Persona" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Estacionamiento_Condominio" Association="Self.FK_Estacionamiento_Condominio">
+      <End Role="Condominio" EntitySet="Condominio" />
+      <End Role="Estacionamiento" EntitySet="Estacionamiento" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notificacion_Estacionamiento" Association="Self.FK_Notificacion_Estacionamiento">
+      <End Role="Estacionamiento" EntitySet="Estacionamiento" />
+      <End Role="Notificacion" EntitySet="Notificacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Visita_Estacionamiento" Association="Self.FK_Visita_Estacionamiento">
+      <End Role="Estacionamiento" EntitySet="Estacionamiento" />
+      <End Role="Visita" EntitySet="Visita" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

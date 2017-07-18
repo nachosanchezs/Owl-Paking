@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Database1ModelStoreContainer" CdmEntityContainer="Database1Entities">
+    <EntitySetMapping Name="Administrador">
+      <EntityTypeMapping TypeName="Database1Model.Administrador">
+        <MappingFragment StoreEntitySet="Administrador">
+          <ScalarProperty Name="Administrador_Id" ColumnName="Administrador_Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Correo" ColumnName="Correo" />
+          <ScalarProperty Name="Constraseña" ColumnName="Constraseña" />
+          <ScalarProperty Name="Cargo" ColumnName="Cargo" />
+          <ScalarProperty Name="Condominio_Id" ColumnName="Condominio_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Condominio">
+      <EntityTypeMapping TypeName="Database1Model.Condominio">
+        <MappingFragment StoreEntitySet="Condominio">
+          <ScalarProperty Name="Condominio_Id" ColumnName="Condominio_Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Estac_Persona">
+      <EntityTypeMapping TypeName="Database1Model.Estac_Persona">
+        <MappingFragment StoreEntitySet="Estac_Persona">
+          <ScalarProperty Name="Estac_Persona_Id" ColumnName="Estac_Persona_Id" />
+          <ScalarProperty Name="Patente" ColumnName="Patente" />
+          <ScalarProperty Name="Propietario_Id" ColumnName="Propietario_Id" />
+          <ScalarProperty Name="Estacionamiento_Id" ColumnName="Estacionamiento_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Estacionamiento">
+      <EntityTypeMapping TypeName="Database1Model.Estacionamiento">
+        <MappingFragment StoreEntitySet="Estacionamiento">
+          <ScalarProperty Name="Estacionamiento_Id" ColumnName="Estacionamiento_Id" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+          <ScalarProperty Name="Condominio_Id" ColumnName="Condominio_Id" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Notificacion">
+      <EntityTypeMapping TypeName="Database1Model.Notificacion">
+        <MappingFragment StoreEntitySet="Notificacion">
+          <ScalarProperty Name="Notificacion_Id" ColumnName="Notificacion_Id" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Comentario" ColumnName="Comentario" />
+          <ScalarProperty Name="Estacionamiento_Id" ColumnName="Estacionamiento_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Propietario">
+      <EntityTypeMapping TypeName="Database1Model.Propietario">
+        <MappingFragment StoreEntitySet="Propietario">
+          <ScalarProperty Name="Propietario_Id" ColumnName="Propietario_Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Torre" ColumnName="Torre" />
+          <ScalarProperty Name="Departamento" ColumnName="Departamento" />
+          <ScalarProperty Name="Correo" ColumnName="Correo" />
+          <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Visita">
+      <EntityTypeMapping TypeName="Database1Model.Visita">
+        <MappingFragment StoreEntitySet="Visita">
+          <ScalarProperty Name="Hora" ColumnName="Hora" />
+          <ScalarProperty Name="Visita_Id" ColumnName="Visita_Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Patente" ColumnName="Patente" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Torre" ColumnName="Torre" />
+          <ScalarProperty Name="Departamento" ColumnName="Departamento" />
+          <ScalarProperty Name="Estacionamiento_Id" ColumnName="Estacionamiento_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

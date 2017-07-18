@@ -1,0 +1,590 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ti2Model.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="ti2ModelStoreContainer">
+          <EntitySet Name="Administrador" EntityType="ti2Model.Store.Administrador" store:Type="Tables" Schema="ti2" />
+          <EntitySet Name="Arduino" EntityType="ti2Model.Store.Arduino" store:Type="Tables" Schema="ti2" />
+          <EntitySet Name="Condominio" EntityType="ti2Model.Store.Condominio" store:Type="Tables" Schema="ti2" />
+          <EntitySet Name="Estac_Persona" EntityType="ti2Model.Store.Estac_Persona" store:Type="Tables" Schema="ti2" />
+          <EntitySet Name="Estacionamiento" EntityType="ti2Model.Store.Estacionamiento" store:Type="Tables" Schema="ti2" />
+          <EntitySet Name="Notificacion" EntityType="ti2Model.Store.Notificacion" store:Type="Tables" Schema="ti2" />
+          <EntitySet Name="Propietario" EntityType="ti2Model.Store.Propietario" store:Type="Tables" Schema="ti2" />
+          <EntitySet Name="Visita" EntityType="ti2Model.Store.Visita" store:Type="Tables" Schema="ti2" />
+          <AssociationSet Name="FK__Estacionamiento" Association="ti2Model.Store.FK__Estacionamiento">
+            <End Role="Estacionamiento" EntitySet="Estacionamiento" />
+            <End Role="Arduino" EntitySet="Arduino" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Administrador_Condominio1" Association="ti2Model.Store.fk_Administrador_Condominio1">
+            <End Role="Condominio" EntitySet="Condominio" />
+            <End Role="Administrador" EntitySet="Administrador" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Estac_Persona_Estacionamiento1" Association="ti2Model.Store.fk_Estac_Persona_Estacionamiento1">
+            <End Role="Estacionamiento" EntitySet="Estacionamiento" />
+            <End Role="Estac_Persona" EntitySet="Estac_Persona" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Estac_Persona_Propietario1" Association="ti2Model.Store.fk_Estac_Persona_Propietario1">
+            <End Role="Propietario" EntitySet="Propietario" />
+            <End Role="Estac_Persona" EntitySet="Estac_Persona" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Estacionamiento_Arduino" Association="ti2Model.Store.fk_Estacionamiento_Arduino">
+            <End Role="Arduino" EntitySet="Arduino" />
+            <End Role="Estacionamiento" EntitySet="Estacionamiento" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Estacionamiento_Condominio" Association="ti2Model.Store.fk_Estacionamiento_Condominio">
+            <End Role="Condominio" EntitySet="Condominio" />
+            <End Role="Estacionamiento" EntitySet="Estacionamiento" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Notificacion_Estacionamiento1" Association="ti2Model.Store.fk_Notificacion_Estacionamiento1">
+            <End Role="Estacionamiento" EntitySet="Estacionamiento" />
+            <End Role="Notificacion" EntitySet="Notificacion" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Visita_Estacionamiento1" Association="ti2Model.Store.fk_Visita_Estacionamiento1">
+            <End Role="Estacionamiento" EntitySet="Estacionamiento" />
+            <End Role="Visita" EntitySet="Visita" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Administrador">
+          <Key>
+            <PropertyRef Name="Administrador_Id" />
+          </Key>
+          <Property Name="Administrador_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="varchar" MaxLength="45" />
+          <Property Name="Correo" Type="varchar" MaxLength="45" />
+          <Property Name="Password" Type="varchar" MaxLength="45" />
+          <Property Name="Cargo" Type="varchar" MaxLength="45" />
+          <Property Name="Condominio_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Arduino">
+          <Key>
+            <PropertyRef Name="Arduino_Id" />
+          </Key>
+          <Property Name="Arduino_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Estado" Type="int" />
+          <Property Name="Estacionamiento_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="Condominio">
+          <Key>
+            <PropertyRef Name="Condominio_Id" />
+          </Key>
+          <Property Name="Condominio_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="Estac_Persona">
+          <Key>
+            <PropertyRef Name="Estac_Persona_Id" />
+          </Key>
+          <Property Name="Estac_Persona_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Estacionamiento_Id" Type="int" Nullable="false" />
+          <Property Name="Propietario_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Estacionamiento">
+          <Key>
+            <PropertyRef Name="Estacionamiento_Id" />
+          </Key>
+          <Property Name="Estacionamiento_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Estado" Type="varchar" MaxLength="45" />
+          <Property Name="Tipo" Type="varchar" MaxLength="45" />
+          <Property Name="Codigo" Type="varchar" MaxLength="45" />
+          <Property Name="Condominio_Id" Type="int" Nullable="false" />
+          <Property Name="Arduino_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="Notificacion">
+          <Key>
+            <PropertyRef Name="Notificacion_Id" />
+          </Key>
+          <Property Name="Notificacion_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="Comentario" Type="varchar" MaxLength="200" />
+          <Property Name="Estacionamiento_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Propietario">
+          <Key>
+            <PropertyRef Name="Propietario_Id" />
+          </Key>
+          <Property Name="Propietario_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="varchar" MaxLength="45" />
+          <Property Name="Patente" Type="varchar" MaxLength="45" />
+          <Property Name="Telefono" Type="varchar" MaxLength="45" />
+          <Property Name="Torre" Type="varchar" MaxLength="45" />
+          <Property Name="Departamento" Type="varchar" MaxLength="45" />
+          <Property Name="Correo" Type="varchar" MaxLength="45" />
+          <Property Name="Password" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="Visita">
+          <Key>
+            <PropertyRef Name="Visita_Id" />
+          </Key>
+          <Property Name="Visita_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="varchar" MaxLength="45" />
+          <Property Name="Patente" Type="varchar" MaxLength="45" />
+          <Property Name="Telefono" Type="varchar" MaxLength="45" />
+          <Property Name="Torre" Type="varchar" MaxLength="45" />
+          <Property Name="Departamento" Type="varchar" MaxLength="45" />
+          <Property Name="Hora" Type="datetime" />
+          <Property Name="Estacionamiento_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Estacionamiento">
+          <End Role="Estacionamiento" Type="ti2Model.Store.Estacionamiento" Multiplicity="0..1" />
+          <End Role="Arduino" Type="ti2Model.Store.Arduino" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estacionamiento">
+              <PropertyRef Name="Estacionamiento_Id" />
+            </Principal>
+            <Dependent Role="Arduino">
+              <PropertyRef Name="Estacionamiento_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Administrador_Condominio1">
+          <End Role="Condominio" Type="ti2Model.Store.Condominio" Multiplicity="1" />
+          <End Role="Administrador" Type="ti2Model.Store.Administrador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Condominio">
+              <PropertyRef Name="Condominio_Id" />
+            </Principal>
+            <Dependent Role="Administrador">
+              <PropertyRef Name="Condominio_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Estac_Persona_Estacionamiento1">
+          <End Role="Estacionamiento" Type="ti2Model.Store.Estacionamiento" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Estac_Persona" Type="ti2Model.Store.Estac_Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estacionamiento">
+              <PropertyRef Name="Estacionamiento_Id" />
+            </Principal>
+            <Dependent Role="Estac_Persona">
+              <PropertyRef Name="Estacionamiento_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Estac_Persona_Propietario1">
+          <End Role="Propietario" Type="ti2Model.Store.Propietario" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Estac_Persona" Type="ti2Model.Store.Estac_Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Propietario">
+              <PropertyRef Name="Propietario_Id" />
+            </Principal>
+            <Dependent Role="Estac_Persona">
+              <PropertyRef Name="Propietario_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Estacionamiento_Arduino">
+          <End Role="Arduino" Type="ti2Model.Store.Arduino" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Estacionamiento" Type="ti2Model.Store.Estacionamiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Arduino">
+              <PropertyRef Name="Arduino_Id" />
+            </Principal>
+            <Dependent Role="Estacionamiento">
+              <PropertyRef Name="Arduino_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Estacionamiento_Condominio">
+          <End Role="Condominio" Type="ti2Model.Store.Condominio" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Estacionamiento" Type="ti2Model.Store.Estacionamiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Condominio">
+              <PropertyRef Name="Condominio_Id" />
+            </Principal>
+            <Dependent Role="Estacionamiento">
+              <PropertyRef Name="Condominio_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Notificacion_Estacionamiento1">
+          <End Role="Estacionamiento" Type="ti2Model.Store.Estacionamiento" Multiplicity="1" />
+          <End Role="Notificacion" Type="ti2Model.Store.Notificacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estacionamiento">
+              <PropertyRef Name="Estacionamiento_Id" />
+            </Principal>
+            <Dependent Role="Notificacion">
+              <PropertyRef Name="Estacionamiento_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Visita_Estacionamiento1">
+          <End Role="Estacionamiento" Type="ti2Model.Store.Estacionamiento" Multiplicity="1" />
+          <End Role="Visita" Type="ti2Model.Store.Visita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estacionamiento">
+              <PropertyRef Name="Estacionamiento_Id" />
+            </Principal>
+            <Dependent Role="Visita">
+              <PropertyRef Name="Estacionamiento_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ti2Model" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ti2Entities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Administrador" EntityType="ti2Model.Administrador" />
+          <EntitySet Name="Condominio" EntityType="ti2Model.Condominio" />
+          <EntitySet Name="Estac_Persona" EntityType="ti2Model.Estac_Persona" />
+          <EntitySet Name="Estacionamiento" EntityType="ti2Model.Estacionamiento" />
+          <EntitySet Name="Notificacion" EntityType="ti2Model.Notificacion" />
+          <EntitySet Name="Propietario" EntityType="ti2Model.Propietario" />
+          <EntitySet Name="Visita" EntityType="ti2Model.Visita" />
+          <AssociationSet Name="fk_Administrador_Condominio1" Association="ti2Model.fk_Administrador_Condominio1">
+            <End Role="Condominio" EntitySet="Condominio" />
+            <End Role="Administrador" EntitySet="Administrador" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Estacionamiento_Condominio" Association="ti2Model.fk_Estacionamiento_Condominio">
+            <End Role="Condominio" EntitySet="Condominio" />
+            <End Role="Estacionamiento" EntitySet="Estacionamiento" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Estac_Persona_Estacionamiento1" Association="ti2Model.fk_Estac_Persona_Estacionamiento1">
+            <End Role="Estacionamiento" EntitySet="Estacionamiento" />
+            <End Role="Estac_Persona" EntitySet="Estac_Persona" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Estac_Persona_Propietario1" Association="ti2Model.fk_Estac_Persona_Propietario1">
+            <End Role="Propietario" EntitySet="Propietario" />
+            <End Role="Estac_Persona" EntitySet="Estac_Persona" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Notificacion_Estacionamiento1" Association="ti2Model.fk_Notificacion_Estacionamiento1">
+            <End Role="Estacionamiento" EntitySet="Estacionamiento" />
+            <End Role="Notificacion" EntitySet="Notificacion" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Visita_Estacionamiento1" Association="ti2Model.fk_Visita_Estacionamiento1">
+            <End Role="Estacionamiento" EntitySet="Estacionamiento" />
+            <End Role="Visita" EntitySet="Visita" />
+          </AssociationSet>
+          <EntitySet Name="Arduino" EntityType="ti2Model.Arduino" />
+          <AssociationSet Name="FK__Estacionamiento" Association="ti2Model.FK__Estacionamiento">
+            <End Role="Estacionamiento" EntitySet="Estacionamiento" />
+            <End Role="Arduino" EntitySet="Arduino" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Estacionamiento_Arduino" Association="ti2Model.fk_Estacionamiento_Arduino">
+            <End Role="Arduino" EntitySet="Arduino" />
+            <End Role="Estacionamiento" EntitySet="Estacionamiento" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Administrador">
+          <Key>
+            <PropertyRef Name="Administrador_Id" />
+          </Key>
+          <Property Name="Administrador_Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="Correo" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="Password" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="Cargo" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="Condominio_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Condominio" Relationship="ti2Model.fk_Administrador_Condominio1" FromRole="Administrador" ToRole="Condominio" />
+        </EntityType>
+        <EntityType Name="Condominio">
+          <Key>
+            <PropertyRef Name="Condominio_Id" />
+          </Key>
+          <Property Name="Condominio_Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Administrador" Relationship="ti2Model.fk_Administrador_Condominio1" FromRole="Condominio" ToRole="Administrador" />
+          <NavigationProperty Name="Estacionamiento" Relationship="ti2Model.fk_Estacionamiento_Condominio" FromRole="Condominio" ToRole="Estacionamiento" />
+        </EntityType>
+        <EntityType Name="Estac_Persona">
+          <Key>
+            <PropertyRef Name="Estac_Persona_Id" />
+          </Key>
+          <Property Name="Estac_Persona_Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Estacionamiento_Id" Type="Int32" Nullable="false" />
+          <Property Name="Propietario_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Estacionamiento" Relationship="ti2Model.fk_Estac_Persona_Estacionamiento1" FromRole="Estac_Persona" ToRole="Estacionamiento" />
+          <NavigationProperty Name="Propietario" Relationship="ti2Model.fk_Estac_Persona_Propietario1" FromRole="Estac_Persona" ToRole="Propietario" />
+        </EntityType>
+        <EntityType Name="Estacionamiento">
+          <Key>
+            <PropertyRef Name="Estacionamiento_Id" />
+          </Key>
+          <Property Name="Estacionamiento_Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Estado" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="Tipo" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="Codigo" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="Condominio_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Condominio" Relationship="ti2Model.fk_Estacionamiento_Condominio" FromRole="Estacionamiento" ToRole="Condominio" />
+          <NavigationProperty Name="Estac_Persona" Relationship="ti2Model.fk_Estac_Persona_Estacionamiento1" FromRole="Estacionamiento" ToRole="Estac_Persona" />
+          <NavigationProperty Name="Notificacion" Relationship="ti2Model.fk_Notificacion_Estacionamiento1" FromRole="Estacionamiento" ToRole="Notificacion" />
+          <NavigationProperty Name="Visita" Relationship="ti2Model.fk_Visita_Estacionamiento1" FromRole="Estacionamiento" ToRole="Visita" />
+          <NavigationProperty Name="Arduino" Relationship="ti2Model.FK__Estacionamiento" FromRole="Estacionamiento" ToRole="Arduino" />
+          <Property Type="Int32" Name="Arduino_Id" />
+          <NavigationProperty Name="Arduino1" Relationship="ti2Model.fk_Estacionamiento_Arduino" FromRole="Estacionamiento" ToRole="Arduino" />
+        </EntityType>
+        <EntityType Name="Notificacion">
+          <Key>
+            <PropertyRef Name="Notificacion_Id" />
+          </Key>
+          <Property Name="Notificacion_Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Fecha" Type="DateTime" />
+          <Property Name="Comentario" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="Estacionamiento_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Estacionamiento" Relationship="ti2Model.fk_Notificacion_Estacionamiento1" FromRole="Notificacion" ToRole="Estacionamiento" />
+        </EntityType>
+        <EntityType Name="Propietario">
+          <Key>
+            <PropertyRef Name="Propietario_Id" />
+          </Key>
+          <Property Name="Propietario_Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="Patente" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="Telefono" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="Torre" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="Departamento" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="Correo" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="Password" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Estac_Persona" Relationship="ti2Model.fk_Estac_Persona_Propietario1" FromRole="Propietario" ToRole="Estac_Persona" />
+        </EntityType>
+        <EntityType Name="Visita">
+          <Key>
+            <PropertyRef Name="Visita_Id" />
+          </Key>
+          <Property Name="Visita_Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="Patente" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="Telefono" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="Torre" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="Departamento" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="Hora" Type="DateTime" />
+          <Property Name="Estacionamiento_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Estacionamiento" Relationship="ti2Model.fk_Visita_Estacionamiento1" FromRole="Visita" ToRole="Estacionamiento" />
+        </EntityType>
+        <Association Name="fk_Administrador_Condominio1">
+          <End Role="Condominio" Type="ti2Model.Condominio" Multiplicity="1" />
+          <End Role="Administrador" Type="ti2Model.Administrador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Condominio">
+              <PropertyRef Name="Condominio_Id" />
+            </Principal>
+            <Dependent Role="Administrador">
+              <PropertyRef Name="Condominio_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Estacionamiento_Condominio">
+          <End Role="Condominio" Type="ti2Model.Condominio" Multiplicity="1" />
+          <End Role="Estacionamiento" Type="ti2Model.Estacionamiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Condominio">
+              <PropertyRef Name="Condominio_Id" />
+            </Principal>
+            <Dependent Role="Estacionamiento">
+              <PropertyRef Name="Condominio_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Estac_Persona_Estacionamiento1">
+          <End Role="Estacionamiento" Type="ti2Model.Estacionamiento" Multiplicity="1" />
+          <End Role="Estac_Persona" Type="ti2Model.Estac_Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estacionamiento">
+              <PropertyRef Name="Estacionamiento_Id" />
+            </Principal>
+            <Dependent Role="Estac_Persona">
+              <PropertyRef Name="Estacionamiento_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Estac_Persona_Propietario1">
+          <End Role="Propietario" Type="ti2Model.Propietario" Multiplicity="1" />
+          <End Role="Estac_Persona" Type="ti2Model.Estac_Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Propietario">
+              <PropertyRef Name="Propietario_Id" />
+            </Principal>
+            <Dependent Role="Estac_Persona">
+              <PropertyRef Name="Propietario_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Notificacion_Estacionamiento1">
+          <End Role="Estacionamiento" Type="ti2Model.Estacionamiento" Multiplicity="1" />
+          <End Role="Notificacion" Type="ti2Model.Notificacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estacionamiento">
+              <PropertyRef Name="Estacionamiento_Id" />
+            </Principal>
+            <Dependent Role="Notificacion">
+              <PropertyRef Name="Estacionamiento_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Visita_Estacionamiento1">
+          <End Role="Estacionamiento" Type="ti2Model.Estacionamiento" Multiplicity="1" />
+          <End Role="Visita" Type="ti2Model.Visita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estacionamiento">
+              <PropertyRef Name="Estacionamiento_Id" />
+            </Principal>
+            <Dependent Role="Visita">
+              <PropertyRef Name="Estacionamiento_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Arduino">
+          <Key>
+            <PropertyRef Name="Arduino_Id" />
+          </Key>
+          <Property Type="Int32" Name="Arduino_Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="Estado" />
+          <Property Type="Int32" Name="Estacionamiento_Id" />
+          <NavigationProperty Name="Estacionamiento" Relationship="ti2Model.FK__Estacionamiento" FromRole="Arduino" ToRole="Estacionamiento" />
+          <NavigationProperty Name="Estacionamiento1" Relationship="ti2Model.fk_Estacionamiento_Arduino" FromRole="Arduino" ToRole="Estacionamiento" />
+        </EntityType>
+        <Association Name="FK__Estacionamiento">
+          <End Type="ti2Model.Estacionamiento" Role="Estacionamiento" Multiplicity="0..1" />
+          <End Type="ti2Model.Arduino" Role="Arduino" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estacionamiento">
+              <PropertyRef Name="Estacionamiento_Id" />
+            </Principal>
+            <Dependent Role="Arduino">
+              <PropertyRef Name="Estacionamiento_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Estacionamiento_Arduino">
+          <End Type="ti2Model.Arduino" Role="Arduino" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ti2Model.Estacionamiento" Role="Estacionamiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Arduino">
+              <PropertyRef Name="Arduino_Id" />
+            </Principal>
+            <Dependent Role="Estacionamiento">
+              <PropertyRef Name="Arduino_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ti2ModelStoreContainer" CdmEntityContainer="ti2Entities">
+          <EntitySetMapping Name="Administrador">
+            <EntityTypeMapping TypeName="ti2Model.Administrador">
+              <MappingFragment StoreEntitySet="Administrador">
+                <ScalarProperty Name="Administrador_Id" ColumnName="Administrador_Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Cargo" ColumnName="Cargo" />
+                <ScalarProperty Name="Condominio_Id" ColumnName="Condominio_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Condominio">
+            <EntityTypeMapping TypeName="ti2Model.Condominio">
+              <MappingFragment StoreEntitySet="Condominio">
+                <ScalarProperty Name="Condominio_Id" ColumnName="Condominio_Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Estac_Persona">
+            <EntityTypeMapping TypeName="ti2Model.Estac_Persona">
+              <MappingFragment StoreEntitySet="Estac_Persona">
+                <ScalarProperty Name="Estac_Persona_Id" ColumnName="Estac_Persona_Id" />
+                <ScalarProperty Name="Estacionamiento_Id" ColumnName="Estacionamiento_Id" />
+                <ScalarProperty Name="Propietario_Id" ColumnName="Propietario_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Estacionamiento">
+            <EntityTypeMapping TypeName="ti2Model.Estacionamiento">
+              <MappingFragment StoreEntitySet="Estacionamiento">
+                <ScalarProperty Name="Arduino_Id" ColumnName="Arduino_Id" />
+                <ScalarProperty Name="Estacionamiento_Id" ColumnName="Estacionamiento_Id" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Condominio_Id" ColumnName="Condominio_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notificacion">
+            <EntityTypeMapping TypeName="ti2Model.Notificacion">
+              <MappingFragment StoreEntitySet="Notificacion">
+                <ScalarProperty Name="Notificacion_Id" ColumnName="Notificacion_Id" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Comentario" ColumnName="Comentario" />
+                <ScalarProperty Name="Estacionamiento_Id" ColumnName="Estacionamiento_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Propietario">
+            <EntityTypeMapping TypeName="ti2Model.Propietario">
+              <MappingFragment StoreEntitySet="Propietario">
+                <ScalarProperty Name="Propietario_Id" ColumnName="Propietario_Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Patente" ColumnName="Patente" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Torre" ColumnName="Torre" />
+                <ScalarProperty Name="Departamento" ColumnName="Departamento" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Visita">
+            <EntityTypeMapping TypeName="ti2Model.Visita">
+              <MappingFragment StoreEntitySet="Visita">
+                <ScalarProperty Name="Visita_Id" ColumnName="Visita_Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Patente" ColumnName="Patente" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Torre" ColumnName="Torre" />
+                <ScalarProperty Name="Departamento" ColumnName="Departamento" />
+                <ScalarProperty Name="Hora" ColumnName="Hora" />
+                <ScalarProperty Name="Estacionamiento_Id" ColumnName="Estacionamiento_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Arduino">
+            <EntityTypeMapping TypeName="ti2Model.Arduino">
+              <MappingFragment StoreEntitySet="Arduino">
+                <ScalarProperty Name="Estacionamiento_Id" ColumnName="Estacionamiento_Id" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Arduino_Id" ColumnName="Arduino_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Predeterminado" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
